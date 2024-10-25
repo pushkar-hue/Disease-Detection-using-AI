@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pneumonia Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .result-container {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        .upload-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .preview-image {
+            max-width: 400px;
+            margin-top: 20px;
+        }
+        #loading {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tuberculosis Detection System</h1>
+        <p>Upload a chest X-ray image for analysis</p>
+        
+        <form id="upload-form" enctype="multipart/form-data">
+            <input type="file" id="file-input" name="file" accept=".png,.jpg,.jpeg" style="display: none;">
+            <button type="button" class="upload-btn" onclick="document.getElementById('file-input').click()">
+                Choose File
+            </button>
+        </form>
+        
+        <div id="loading">Analyzing image...</div>
+        
+        <div class="result-container" id="result-container">
+            <h2>Results</h2>
+            <p id="result-text"></p>
+            
+            <img id="preview-image" class="preview-image">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                const formData = new FormData();
+                formData.append('file', file);
+
+                // Show loading
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('result-container').style.display = 'none';
+
+                fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hide loading
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('result-container').style.display = 'block';
+
+                    if (data.error) {
+                        document.getElementById('result-text').textContent = 'Error: ' + data.error;
+                        return;
+                    }
+
+                    // Display results
+                    document.getElementById('result-text').textContent = 
+                        `Diagnosis: ${data.result}`;
+                    
+                    document.getElementById('preview-image').src = '/static/' + data.image_path;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('result-text').textContent = 'Error processing request';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
