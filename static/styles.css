@@ -1,0 +1,133 @@
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, #f5f7fa, #e0f2f1);
+    color: #333;
+}
+
+/* Header */
+h1 {
+    font-size: 2.5rem;
+    color: #00796b;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Upload Container */
+.upload-container {
+    border: 2px dashed #00796b;
+    padding: 20px;
+    margin: 20px 0;
+    height: 120px;
+    border-radius: 12px;
+    background-color: #e0f7fa;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    cursor: pointer;
+}
+
+.upload-container:hover {
+    transform: scale(1.05);
+    background-color: #b2ebf2;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Upload Button */
+.upload-btn {
+    background-color: #00796b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.upload-btn:hover {
+    background-color: #004d40;
+    transform: scale(1.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading */
+#loading {
+    font-size: 1.2rem;
+    color: #00796b;
+    margin-top: 15px;
+    display: none;
+}
+
+/* Result Container */
+#result-container {
+    margin-top: 20px;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #f1f8e9;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    display: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#result-container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Result Text */
+#result-text {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Preview Image */
+#preview-image {
+    max-width: 100%;
+    margin: 20px 0;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#preview-image:hover {
+    transform: scale(1.08);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Diagnosis Colors */
+.positive {
+    background-color: #ffebee;
+    border: 1px solid #ef9a9a;
+    color: #b71c1c;
+}
+
+.negative {
+    background-color: #e8f5e9;
+    border: 1px solid #a5d6a7;
+    color: #2e7d32;
+}
+
+/* Confidence Text */
+#confidence-text {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #555;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
